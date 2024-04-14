@@ -1,0 +1,13 @@
+package net.javaguide.banking.Mapper;
+
+import net.javaguide.banking.Entity.Account;
+import net.javaguide.banking.dto.AccountDto;
+
+public class AccountMapper {
+	public static Account mapToAccount(AccountDto accountDto) {
+		Account account = new Account(
+			accountDto.getId(), accountDto.getAccountHolderName(),
+			accountDto.getBalance()
+		);
+	}
+}

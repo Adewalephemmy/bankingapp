@@ -1,0 +1,15 @@
+package net.javaguide.banking.Entity;
+
+import jakarta.persistence.Entity;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@Table (name = "account")
+@Entity
+public class Account {
+	private long id;
+	private String accountHolderName;
+	private double balance;
+}

@@ -1,0 +1,5 @@
+package net.javaguide.banking.repository;
+
+public interface AccountRepository {
+
+}

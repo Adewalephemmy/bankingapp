@@ -1,0 +1,8 @@
+package net.javaguide.banking.Entity;
+
+@Entity
+public class Account {
+	private long id;
+	private String accountHolderName;
+	private double balance;
+}

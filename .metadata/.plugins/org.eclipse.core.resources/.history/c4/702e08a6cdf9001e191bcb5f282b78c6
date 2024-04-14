@@ -1,0 +1,67 @@
+package net.javaguide.banking.service.Impl;
+
+import javax.management.RuntimeErrorException;
+
+import org.springframework.stereotype.Service;
+
+import net.javaguide.banking.Entity.Account;
+import net.javaguide.banking.Mapper.AccountMapper;
+import net.javaguide.banking.dto.AccountDto;
+import net.javaguide.banking.repository.AccountRepository;
+import net.javaguide.banking.service.AccountService;
+
+@Service
+public class AccountServiceImpl implements AccountService{
+	
+	private  AccountRepository accountRepository;
+
+	public AccountServiceImpl(AccountRepository accountRepository) {
+		this.accountRepository = accountRepository;
+	}
+
+
+	@Override
+	public AccountDto createAccount(AccountDto accountDto) {
+		Account account = AccountMapper.mapToAccount(accountDto);
+		Account  saveAccount = accountRepository.save(account);
+		return AccountMapper.mapToAccountDto(saveAccount);
+	}
+
+
+	@Override
+	public AccountDto getAccountById(Long id) {
+		// TODO Auto-generated method stub
+		Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account does not exits"));
+		return AccountMapper.mapToAccountDto(account);
+	}
+
+
+	@Override
+	public AccountDto deposit(Long id, double amount) {
+		Account account = accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account does not exits"));
+		
+		double total = account.getBalance()+ amount;
+		account.setBalance(total);
+		Account saveAccount = accountRepository.save(account);
+		return AccountMapper.mapToAccountDto(saveAccount);
+	}
+
+
+	@Override
+	public AccountDto withdrawl(Long id, double amount) {
+		// TODO Auto-generated method stub
+		Account account = accountRepository.findById(id).
+				orElseThrow(() -> new RuntimeException("Account does not exits"));
+		
+		if(account.getBalance()< amount) {
+			throw new RuntimeException("Insufficient Balance");
+		}
+		
+		double total = account.getBalance() - amount;
+		account.setBalance(total);
+		Account savedAccount = accountRepository.save(account);
+		accountRepository.save(savedAccount);
+		return AccountMapper.mapToAccountDto(savedAccount);
+	}
+
+}

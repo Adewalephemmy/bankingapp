@@ -1,0 +1,9 @@
+package net.javaguide.banking.service;
+
+import net.javaguide.banking.Entity.Account;
+
+public interface AccountService {
+	
+	AccountDto createAccount(AccountDto accountDto);
+
+}

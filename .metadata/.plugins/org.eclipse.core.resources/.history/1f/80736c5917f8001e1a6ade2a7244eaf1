@@ -1,0 +1,25 @@
+package net.javaguide.banking.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class AccountDto {
+	private Long Id;
+	private String accountHolderName;
+	private double balance;
+	
+	
+	public String getAccountHolderName() {
+		return accountHolderName;
+	}
+	public double getBalance() {
+		return balance;
+	}
+	
+	public Long getId() {
+		return Id;
+	}
+
+}
